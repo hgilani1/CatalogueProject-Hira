@@ -47,12 +47,7 @@ namespace CatalogueProject
             }
         }
 
-		public static void ProductInfo()
-        {
-
-        }
-
-
+		
 		
 	}
 	public abstract class ProductData
@@ -69,15 +64,25 @@ namespace CatalogueProject
 		private bool _attractsGST;
 		public bool AttractsGST { get { return _attractsGST; } set { _attractsGST = value; } }
 
-		//private Tax _gst = Tax.GST;
-		//public string Gst { get { return _gst.ToString(); } }
 
-		//public double CalculateGST()
-		//{
-		//	return Math.Round(_productPrice * (1 + Tax.ProductTax), 2);
-		//}
+		private double _price;
+		public double Price => _price;
 
+		private double _tax;
+		public double Tax {  get { return _tax; } set { _tax = 0.1; } }
 
 
+		public ProductData(string productName, string productDescription, double productPrice)
+		{
+			_productName = productName;
+			_productDescription = productDescription;
+			_productPrice = productPrice;
+		}
+
+
+		public virtual double CalculateTax()
+		{
+			return Math.Round(_price * (1 + _tax));
+		}
 	}
 }
